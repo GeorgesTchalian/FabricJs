@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<style>
+span
+{
+color:green;
+}
+</style>
+<body onload="add();dd();">
+<h4>Clique dentro do canvas para iniciar<br><span>Canvas 1 - </span>não possui fabric.js<br><span>Canvas 2 - </span>possui fabric.js</h4>
+<h4><span>Canvas 1 - </span><br>Utilize <span>A</span> para a direção Esquerda<br> Utilize <span>W</span> para a direção Cima<br> Utilize <span>D</span> para a direção Direita<br> Utilize <span>S</span> para a direção Baixo</h4> 
+<canvas id="myCanvas" width="600" height="400" style="border:1px solid #000000;">
+</canvas>
+<br>
+
+<h4><span>Canvas 2 - </span><br>Utilize <span>a tecla direcional Esquerda</span> para a direção Esquerda<br> Utilize <span>a tecla direcional Cima</span> para a direção Cima<br> Utilize <span>a tecla direcional Direita</span> para a direção Direita<br> Utilize <span>a tecla direcional Baixo</span> para a direção Baixo</h4> 
+<canvas id="myCanvas1" width="600" height="400" style="border:1px solid #000000;">
+</canvas>
+
+<script>
+canvas = document.getElementById('myCanvas');
+ctx = canvas.getContext("2d");
+x = 10;
+y = 10;
+function add() {
+	background_imgTag = new Image(); //definindo uma variável com uma nova imagem
+	background_imgTag.onload = uploadBackground; // ajustando uma função, fazendo o onload desta variável
+	background_imgTag.src = "jogador.png";   // carregando imagem
+}
+
+function uploadBackground() {
+	ctx.drawImage(background_imgTag, x, y, 150, 140);
+}
+
+window.addEventListener("keydown", function (e)
+{
+keyPressed = e.keyCode;
+if(keyPressed == "68")
+{
+x = x + 10;
+uploadBackground();
+}
+if(keyPressed == "83")
+{
+y = y + 10;
+uploadBackground();
+}
+if(keyPressed == "65")
+{
+x = x - 10;
+uploadBackground();
+}
+if(keyPressed == "87")
+{
+y = y - 10;
+uploadBackground();
+}
+});
+</script>
+
+<script src="https://mahdihat791.github.io/v2/fabric.js"></script>
+<script>
+var canvas1 = new fabric.Canvas('myCanvas1');
+ctx1 = canvas1.getContext("2d");
+xx = 10;	
+yy = 10;
+pp = "";
+function dd()
+{
+fabric.Image.fromURL("jogador.png", function(Img) {
+pp = Img;
+	pp.scaleToWidth(150);
+	pp.scaleToHeight(140);
+	pp.set({
+	top:yy,
+	left:xx
+	});
+	canvas1.add(Img);
+	});
+
+}
+window.addEventListener("keydown", function (e)
+{
+keyPressed = e.keyCode;
+if(keyPressed == "38")
+{
+yy = yy - 10;
+canvas1.remove(pp);
+dd();
+}
+if(keyPressed == "37")
+{
+xx = xx - 10;
+canvas1.remove(pp);
+dd();
+}
+if(keyPressed == "40")
+{
+yy = yy + 10;
+canvas1.remove(pp);
+dd();
+}
+
+if(keyPressed == "39")
+{
+xx = xx + 10;
+canvas1.remove(pp);
+dd();
+}
+});
+
+</script>
+
+</body>
+</html>
